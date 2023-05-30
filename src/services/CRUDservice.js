@@ -13,7 +13,7 @@ let createNewUser = async (data) => {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 address: data.address,
-                phonenumber: data.phonenumber,
+                phonenumber: data.phoneNumber,
                 gender: data.gender === '1' ? true : false,
                 roleId: data.roleId,
             })
@@ -95,9 +95,27 @@ let updateUserData = (data) => {
         }
     })
 }
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: { id: userId }
+            })
+            if (user) {
+                await user.destroy();
+
+            }
+            resolve();
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     createNewUser: createNewUser,
     getAllUser: getAllUser,
     getUserInfoById: getUserInfoById,
     updateUserData: updateUserData,
+    deleteUserById: deleteUserById,
 }
