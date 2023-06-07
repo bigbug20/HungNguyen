@@ -60,7 +60,7 @@ let deleteCRUD = async (req, res) => {
         return res.send('Delete the user succeed')
     }
     else {
-        return res.send('User not found!');
+        return res.send('User not found! ');
     }
 }
 
